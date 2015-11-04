@@ -1,16 +1,27 @@
 package util;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class UnsignedByte {
 	private byte value;
 
-	public UnsignedByte(int i) {
-		set(i);
+	private UnsignedByte(int i) {
+		value = (byte) i;
 	}
 	
-	public int get() {
+	public int value() {
 		return value & 0xFF;
 	}
-	public void set(int i) {
-		value = (byte) i;
+	
+	
+	private static Map<Integer, UnsignedByte> ubMap = new HashMap<>();
+	public static UnsignedByte get(int i) {
+		UnsignedByte ub = ubMap.get(i);
+		if (ub == null) {
+			ub = new UnsignedByte(i);
+			ubMap.put(i, ub);
+		}
+		return ub;
 	}
 }
