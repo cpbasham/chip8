@@ -7,7 +7,7 @@ public class Run {
 		Chip8 emulator = new Chip8(new Chip8GUI());
 		
 		emulator.initialize();
-		emulator.load("PONG");
+		emulator.load("Chip-8_Resources/pong2.c8");
 		
 		// loop
 		while (true) {
