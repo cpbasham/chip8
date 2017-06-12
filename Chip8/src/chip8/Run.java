@@ -1,25 +1,22 @@
 package chip8;
 
-import java.io.IOException;
 
 public class Run {
-	public static void main(String[] args) throws IOException {
-		Chip8 emulator = new Chip8(new Chip8GUI());
+	public static void main(String[] args) throws Exception {
+		Chip8 emulator = new Chip8();
 		
 		emulator.initialize();
-		emulator.load("PONG");
+		emulator.load("games/PONG2");
 		
 		// loop
 		while (true) {
 			emulator.emulateCycle();
 			
 			if (emulator.drawFlag) {
-				emulator.gui.repaint();
+				emulator.ui.refresh();
 			}
 			
 //			emulator.setKeys();
 		}
-		
-//		Chip8 emulator = new Chip8(new TestGUI());
 	}
 }

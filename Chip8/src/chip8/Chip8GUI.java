@@ -10,20 +10,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-public class Chip8GUI implements Chip8.GUI {
-//	public static int NUM_COLS = 64;
-//	public static int NUM_ROWS = 32;
-	public static int NUM_COLS = 32;
-	public static int NUM_ROWS = 32;
+public class Chip8GUI implements Chip8.UI {
 	public static int PIXEL_WIDTH = 8;
 	public static int PIXEL_HEIGHT = 8;
 	
+	public int NUM_COLS, NUM_ROWS;
+	
 	private JFrame frame;
 	private JPanel panel;
-	private boolean[] pixelGrid;
+	private boolean[] pixels;
 	
-	public Chip8GUI() {
-		this.pixelGrid = new boolean[NUM_COLS * NUM_ROWS];
+	public Chip8GUI(boolean[] pixels, int NUM_COLS, int NUM_ROWS) {
+		this.pixels = pixels;
+		this.NUM_COLS = NUM_COLS;
+		this.NUM_ROWS = NUM_ROWS;
+		
 		this.frame = new JFrame();
 		this.frame.setBackground(Color.RED);
 		
@@ -41,10 +42,7 @@ public class Chip8GUI implements Chip8.GUI {
 	// *******************************
 	// *** GUI Interface functions ***
 	// *******************************
-	public boolean[] getPixelGrid() {
-		return this.pixelGrid;
-	}
-	public void repaint() {
+	public void refresh() {
 		this.frame.repaint();
 	}
 	// *******************************
@@ -69,8 +67,8 @@ public class Chip8GUI implements Chip8.GUI {
             super.paintComponent(g);
             Graphics2D g2 = (Graphics2D) g;
             
-            for (int i=0; i<pixelGrid.length; i++) {
-            	if (pixelGrid[i]) {
+            for (int i=0; i<pixels.length; i++) {
+            	if (pixels[i]) {
             		g2.setColor(Color.BLACK);
         		} else {
         			g2.setColor(Color.WHITE);
